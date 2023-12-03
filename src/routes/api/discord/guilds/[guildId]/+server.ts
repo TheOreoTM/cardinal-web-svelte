@@ -1,4 +1,4 @@
-import type { Guild } from '$lib/utils/types';
+import type { Guild } from '$lib/types';
 import { fetchDiscordApi } from '$lib/utils/util';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';

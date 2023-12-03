@@ -5,8 +5,15 @@ const DiscordOauthURL = `https://discord.com/oauth2/authorize`;
 
 export const oauthURL = new URL(DiscordOauthURL);
 oauthURL.search = new URLSearchParams([
-	['redirect_uri', `${PUBLIC_BASE_WEB_URL}/oauth/callback`],
-	['response_type', 'code'],
+	['redirect_uri', `${PUBLIC_BASE_WEB_URL}/manage`],
+	['response_type', 'token'],
 	['scope', ['identify', 'guilds'].join(' ')],
 	['client_id', PUBLIC_CLIENT_ID]
 ]).toString();
+
+export const PathNames = {
+	index: '',
+	manage: 'manage',
+	logout: 'logout',
+	login: 'login'
+};

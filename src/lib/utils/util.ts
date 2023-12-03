@@ -1,6 +1,6 @@
 import { API_URL, CARDINAL_API_URL, DISCORD_TOKEN } from '$env/static/private';
 import { DISCORD_API_URL } from './constants';
-import type { ApiPath } from './types';
+import type { ApiPath } from '../types';
 
 /**
  * Base API
