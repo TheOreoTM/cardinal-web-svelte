@@ -1,7 +1,7 @@
 import { auth } from '$lib/server/lucia';
 import { redirect } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { user } from '$lib/stores';
+import { userStore } from '$lib/stores';
 import { get } from 'svelte/store';
 import { PathNames } from '$lib/utils/constants';
 
@@ -15,14 +15,12 @@ export const GET: RequestHandler = async ({ locals }) => {
 
 		await auth.deleteDeadUserSessions(session.user.userId);
 
-		user.set(null);
-		console.log(get(user), 'Yo Yo');
+		userStore.set(null);
 
 		throw redirect(303, PathNames.index);
 	}
 
-	user.set(null);
-	console.log(get(user), 'Yoo');
+	userStore.set(null);
 
-	throw redirect(301, PathNames.index);
+	throw redirect(303, PathNames.index);
 };

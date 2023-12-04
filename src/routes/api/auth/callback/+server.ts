@@ -2,11 +2,10 @@ import { discordAuth } from '$lib/server/oauth';
 import type { RequestHandler } from './$types';
 import { redirect, fail } from '@sveltejs/kit';
 import { auth } from '$lib/server/lucia';
-import { user } from '$lib/stores';
 import { get } from 'svelte/store';
+import { userStore } from '$lib/stores';
 
 export const GET: RequestHandler = async ({ request, cookies, locals }) => {
-	console.log('HIIII');
 	const url = new URL(request.url);
 	const code = url.searchParams.get('code');
 	const state = url.searchParams.get('state');
@@ -31,7 +30,7 @@ export const GET: RequestHandler = async ({ request, cookies, locals }) => {
 		attributes: {}
 	});
 	locals.auth.setSession(session);
-	user.set(discordUser);
-	console.log(get(user));
+	userStore.set(discordUser);
+	console.log(get(userStore));
 	throw redirect(302, '/');
 };

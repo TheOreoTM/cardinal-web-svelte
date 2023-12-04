@@ -9,7 +9,6 @@
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import SideBar from '$lib/components/SideBar.svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
-	import type { LayoutData } from './$types';
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { user as userStore } from '$lib/stores';
+	import { userStore } from '$lib/stores';
 	import { PathNames } from '$lib/utils/constants';
 	import { getUserAvatarUrl } from '$lib/utils/functions';
 	import { AppBar, Avatar, getDrawerStore } from '@skeletonlabs/skeleton';
@@ -11,6 +11,7 @@
 	}
 
 	const activeUser = get(userStore);
+	console.log('NavBar', activeUser);
 </script>
 
 <AppBar>
@@ -28,7 +29,7 @@
 		<strong class="text-xl uppercase">Cardinal</strong>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
-		{#if activeUser}
+		{#if activeUser !== null}
 			<Avatar
 				width="w-14"
 				src={getUserAvatarUrl(activeUser?.id ?? '0', activeUser?.avatar ?? null)}
