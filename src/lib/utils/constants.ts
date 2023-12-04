@@ -14,6 +14,6 @@ oauthURL.search = new URLSearchParams([
 export const PathNames = {
 	index: '',
 	manage: 'manage',
-	logout: 'logout',
-	login: 'login'
+	logout: '/api/auth/logout',
+	login: '/api/auth/login'
 };

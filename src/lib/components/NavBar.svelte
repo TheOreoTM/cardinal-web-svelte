@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { state, user } from '$lib/stores';
-	import type { User } from '$lib/types';
-	import { oauthURL } from '$lib/utils/constants';
+	import { user as userStore } from '$lib/stores';
+	import { PathNames } from '$lib/utils/constants';
 	import { getUserAvatarUrl } from '$lib/utils/functions';
 	import { AppBar, Avatar, getDrawerStore } from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 
 	const drawerStore = getDrawerStore();
 	function drawerOpen(): void {
 		drawerStore.open();
 	}
+
+	const activeUser = get(userStore);
 </script>
 
 <AppBar>
@@ -28,10 +28,13 @@
 		<strong class="text-xl uppercase">Cardinal</strong>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
-		{#if $state.loggedIn}
-			<Avatar width="w-14" src={getUserAvatarUrl($user?.id ?? '0', $user?.avatar ?? null)} />
+		{#if activeUser}
+			<Avatar
+				width="w-14"
+				src={getUserAvatarUrl(activeUser?.id ?? '0', activeUser?.avatar ?? null)}
+			/>
 		{:else}
-			<a href={oauthURL.toString()}
+			<a href={PathNames.login}
 				><button class="btn variant-ghost-primary" type="button">Login</button></a
 			>
 		{/if}

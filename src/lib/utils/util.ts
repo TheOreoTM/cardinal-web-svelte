@@ -1,6 +1,11 @@
 import { API_URL, CARDINAL_API_URL, DISCORD_TOKEN } from '$env/static/private';
 import { DISCORD_API_URL } from './constants';
 import type { ApiPath } from '../types';
+import { PUBLIC_BASE_WEB_URL } from '$env/static/public';
+
+export function getRedirectUri() {
+	return `${PUBLIC_BASE_WEB_URL}/api/auth/callback`;
+}
 
 /**
  * Base API

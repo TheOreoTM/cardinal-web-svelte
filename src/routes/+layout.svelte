@@ -1,16 +1,7 @@
 <script lang="ts">
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	import {
-		AppBar,
-		AppShell,
-		Avatar,
-		Drawer,
-		Modal,
-		Toast,
-		getDrawerStore,
-		initializeStores
-	} from '@skeletonlabs/skeleton';
+	import { AppShell, Drawer, Modal, Toast, initializeStores } from '@skeletonlabs/skeleton';
 	initializeStores();
 
 	// Dependency: Floating UI
@@ -18,6 +9,7 @@
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import SideBar from '$lib/components/SideBar.svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
+	import type { LayoutData } from './$types';
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 </script>
 
