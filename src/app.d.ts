@@ -1,26 +1,18 @@
-/// <reference types="@sveltejs/kit" />
+// See https://kit.svelte.dev/docs/types#app
+// for information about these interfaces
 
-import type { PrismaClient } from '@prisma/client';
+import type { DiscordUser } from '$lib/types';
 
 declare global {
-	var __prisma: PrismaClient;
-
-	/// <reference types="lucia-auth" />
-	declare namespace Lucia {
-		type Auth = import('$lib/server/lucia').Auth;
-		type UserAttributes = import('@prisma/client').User;
-	}
-
-	declare namespace App {
-		// interface Platform {}
-		type AuthRequest = import('lucia').AuthRequest;
-
-		// eslint-disable-next-line @typescript-eslint/no-empty-interface
-		interface Locals {
-			auth: import('lucia').AuthRequest;
-		}
+	namespace App {
 		// interface Error {}
-		// interface Session {}
-		// interface Stuff {}
+		interface Locals {
+			user: DiscordUser | null;
+		}
+
+		// interface PageData {}
+		// interface Platform {}
 	}
 }
+
+export {};

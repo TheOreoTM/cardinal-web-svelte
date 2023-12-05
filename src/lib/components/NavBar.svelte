@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { userStore } from '$lib/stores';
+	import type { DiscordUser } from '$lib/types';
 	import { PathNames } from '$lib/utils/constants';
 	import { getUserAvatarUrl } from '$lib/utils/functions';
 	import { AppBar, Avatar, getDrawerStore } from '@skeletonlabs/skeleton';
 
-	userStore.subscribe((d) => {
-		console.log('user changed:', d);
-	});
+	export let user: DiscordUser | null = null;
+	export let items: { title: string; href: string }[] = [];
 
 	const drawerStore = getDrawerStore();
 	function drawerOpen(): void {
@@ -29,12 +28,15 @@
 		<strong class="text-xl uppercase">Cardinal</strong>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
-		{$userStore}
-		{#if $userStore !== null}
-			<Avatar
-				width="w-14"
-				src={getUserAvatarUrl($userStore?.id ?? '0', $userStore?.avatar ?? null)}
-			/>
+		{#each items as item}
+			<a class="btn" href={item.href}>
+				{item.title}
+			</a>
+		{/each}
+		{#if user !== null}
+			<a href={PathNames.logout}>
+				<Avatar width="w-14" src={getUserAvatarUrl(user?.id ?? '0', user?.avatar ?? null)} />
+			</a>
 		{:else}
 			<a href={PathNames.login}
 				><button class="btn variant-ghost-primary" type="button">Login</button></a

@@ -9,7 +9,10 @@
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import SideBar from '$lib/components/SideBar.svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
+	import { NavbarItems } from '$lib/utils/config';
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
+
+	export let data;
 </script>
 
 <Toast position="tr" />
@@ -20,7 +23,7 @@
 
 <AppShell slotSidebarLeft="w-0 md:w-52 bg-surface-500/10">
 	<svelte:fragment slot="header">
-		<NavBar />
+		<NavBar items={NavbarItems} user={data.user} />
 	</svelte:fragment>
 	<svelte:fragment slot="sidebarLeft">
 		<!-- <SideBar /> -->

@@ -15,8 +15,8 @@ model AuthUser {
   auth_session AuthSession[]
   auth_key     AuthKey[]
 
-  username  String @unique
-  discordId String
+  username  String
+  discordId String @unique
 
   @@map("auth_user")
 }

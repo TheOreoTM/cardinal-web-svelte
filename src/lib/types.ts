@@ -7,20 +7,23 @@ export type Guild = {
 	permissions: string;
 };
 
-export type User = {
+export type DiscordUser = {
 	id: string;
 	username: string;
 	discriminator: string;
-	avatar: null | string;
-	accent_color: number;
-	avatar_decoration: null | string;
-	banner: null | string;
-	banner_color: string;
+	avatar: string;
+	email: string;
+	verified: boolean;
 	flags: number;
-	locale: string;
-	mfa_enabled: boolean;
 	premium_type: number;
 	public_flags: number;
+	mfa_enabled: boolean;
+	locale: string;
+	accent_color: string;
+	banner_color: string;
+	banner: string;
+	avatar_decoration: string;
+	display_name: string;
 };
 
 export type ApiPath = `discord/guilds/${string}` | 'oauth/callback' | 'status';
