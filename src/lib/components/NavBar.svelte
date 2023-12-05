@@ -3,15 +3,15 @@
 	import { PathNames } from '$lib/utils/constants';
 	import { getUserAvatarUrl } from '$lib/utils/functions';
 	import { AppBar, Avatar, getDrawerStore } from '@skeletonlabs/skeleton';
-	import { get } from 'svelte/store';
+
+	userStore.subscribe((d) => {
+		console.log('user changed:', d);
+	});
 
 	const drawerStore = getDrawerStore();
 	function drawerOpen(): void {
 		drawerStore.open();
 	}
-
-	const activeUser = get(userStore);
-	console.log('NavBar', activeUser);
 </script>
 
 <AppBar>
@@ -29,10 +29,11 @@
 		<strong class="text-xl uppercase">Cardinal</strong>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
-		{#if activeUser !== null}
+		{$userStore}
+		{#if $userStore !== null}
 			<Avatar
 				width="w-14"
-				src={getUserAvatarUrl(activeUser?.id ?? '0', activeUser?.avatar ?? null)}
+				src={getUserAvatarUrl($userStore?.id ?? '0', $userStore?.avatar ?? null)}
 			/>
 		{:else}
 			<a href={PathNames.login}

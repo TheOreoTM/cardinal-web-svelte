@@ -31,6 +31,5 @@ export const GET: RequestHandler = async ({ request, cookies, locals }) => {
 	});
 	locals.auth.setSession(session);
 	userStore.set(discordUser);
-	console.log(get(userStore));
 	throw redirect(302, '/');
 };

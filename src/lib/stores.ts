@@ -1,4 +1,5 @@
 import type { DiscordUser } from '@lucia-auth/oauth/providers';
-import { writable, type Writable } from 'svelte/store';
+import { localStorageStore } from '@skeletonlabs/skeleton';
+import type { Writable } from 'svelte/store';
 
-export const userStore: Writable<DiscordUser | null> = writable(null);
+export const userStore: Writable<DiscordUser | null> = localStorageStore('discordUser', null);
