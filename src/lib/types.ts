@@ -1,4 +1,4 @@
-export type Guild = {
+export type PartialGuild = {
 	id: string;
 	name: string;
 	icon: string;
@@ -11,19 +11,16 @@ export type DiscordUser = {
 	id: string;
 	username: string;
 	discriminator: string;
-	avatar: string;
-	email: string;
-	verified: boolean;
+	avatar: null | string;
+	accent_color: number;
+	avatar_decoration: null | string;
+	banner: null | string;
+	banner_color: string;
 	flags: number;
+	locale: string;
+	mfa_enabled: boolean;
 	premium_type: number;
 	public_flags: number;
-	mfa_enabled: boolean;
-	locale: string;
-	accent_color: string;
-	banner_color: string;
-	banner: string;
-	avatar_decoration: string;
-	display_name: string;
 };
 
 export type ApiPath = `discord/guilds/${string}` | 'oauth/callback' | 'status';

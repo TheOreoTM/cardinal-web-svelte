@@ -1,9 +1,42 @@
-import { DISCORD_CLIENT_SECRET, DISCORD_REDIRECT_URI } from '$env/static/private';
+import { DISCORD_CLIENT_SECRET, DISCORD_REDIRECT_URI, DISCORD_TOKEN } from '$env/static/private';
 import type { Cookies } from '@sveltejs/kit';
 import { DISCORD_API_URL, DISCORD_CLIENT_ID } from '../constants';
+import type { PartialGuild } from '$lib/types';
 
-const ACCESS_TOKEN_COOKIE = 'discord_access_token',
-	REFRESH_TOKEN_COOKIE = 'discord_refresh_token';
+const ACCESS_TOKEN_COOKIE = 'discord_access_token';
+const REFRESH_TOKEN_COOKIE = 'discord_refresh_token';
+
+export const fetchBotGuilds = async (): Promise<PartialGuild[]> => {
+	const request = await fetch(`${DISCORD_API_URL}/users/@me/guilds`, {
+		headers: {
+			Authorization: `Bot ${DISCORD_TOKEN}`
+		}
+	});
+
+	const response = await request?.json();
+
+	if (response.error) {
+		throw response.error;
+	}
+
+	return response;
+};
+
+export const fetchUserGuilds = async (token: string): Promise<PartialGuild[]> => {
+	const request = await fetch(`${DISCORD_API_URL}/users/@me/guilds`, {
+		headers: {
+			Authorization: `Bearer ${token}`
+		}
+	});
+
+	const response = await request?.json();
+
+	if (response.error) {
+		throw response.error;
+	}
+
+	return response;
+};
 
 export const requestDiscordToken = async (searchParams: URLSearchParams): Promise<Tokens> => {
 	// performing a Fetch request to Discord's token endpoint
@@ -38,8 +71,8 @@ export function buildSearchParams(
 	const searchParams = new URLSearchParams();
 	searchParams.append('client_id', DISCORD_CLIENT_ID);
 	searchParams.append('client_secret', DISCORD_CLIENT_SECRET);
-	searchParams.append('grant_type', type == 'callback' ? 'authorization_code' : 'refresh_token');
-	searchParams.append(type == 'callback' ? 'code' : 'refresh_token', code);
+	searchParams.append('grant_type', type === 'callback' ? 'authorization_code' : 'refresh_token');
+	searchParams.append(type === 'callback' ? 'code' : 'refresh_token', code);
 	searchParams.append('redirect_uri', DISCORD_REDIRECT_URI);
 	searchParams.append('scope', scope);
 	return searchParams;

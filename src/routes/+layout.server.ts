@@ -1,7 +1,4 @@
-import type { DiscordUser } from '$lib/types';
-
-export const load = ({ locals }): { user?: DiscordUser } => {
-	if (!locals.user) return {};
+export const load = ({ locals }) => {
 	return {
 		user: locals.user
 	};

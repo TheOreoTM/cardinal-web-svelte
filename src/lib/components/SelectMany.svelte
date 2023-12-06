@@ -18,7 +18,6 @@
 		{ label: 'Peach', value: 'peach', keywords: 'fruit', meta: { healthy: true } }
 	];
 	function onInputChipSelect(event: CustomEvent<AutocompleteOption>): void {
-		console.log('onInputChipSelect', event.detail);
 		if (inputChipList.includes(event.detail.value as string) === false) {
 			inputChipList = [...inputChipList, event.detail.value as string];
 			inputChip = '';

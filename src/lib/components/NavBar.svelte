@@ -1,44 +1,52 @@
 <script lang="ts">
+	import { NavbarItems } from '$lib/utils/config';
 	import type { DiscordUser } from '$lib/types';
+	import { AppBar, Avatar, getDrawerStore, type DrawerSettings } from '@skeletonlabs/skeleton';
 	import { PathNames } from '$lib/utils/constants';
 	import { getUserAvatarUrl } from '$lib/utils/functions';
-	import { AppBar, Avatar, getDrawerStore } from '@skeletonlabs/skeleton';
-
-	export let user: DiscordUser | null = null;
-	export let items: { title: string; href: string }[] = [];
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Menu2 } from '@steeze-ui/tabler-icons';
 
 	const drawerStore = getDrawerStore();
-	function drawerOpen(): void {
-		drawerStore.open();
+	function openSidebar() {
+		const s: DrawerSettings = {
+			bgDrawer: 'bg-surface-900 text-white',
+			bgBackdrop: 'bg-gradient-to-tr from-surface-500/50 via-surface-600/50 to-surface-900/50',
+			width: 'w-[280px] md:w-[480px]',
+			padding: 'p-4',
+			rounded: 'rounded-xl'
+		};
+		drawerStore.open(s);
 	}
+
+	export let user: DiscordUser | null;
+	const items = NavbarItems;
 </script>
 
-<AppBar>
+<AppBar shadow="shadow-2xl" slotFooter="bg-black p-4">
 	<svelte:fragment slot="lead">
-		<button class="md:hidden btn btn-sm mr-4" on:click={drawerOpen}>
-			<span>
-				<svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
-					<rect width="100" height="20" />
-					<rect y="30" width="100" height="20" />
-					<rect y="60" width="100" height="20" />
-				</svg>
-			</span>
+		<button class="btn md:hidden" type="button" on:click={openSidebar}>
+			<Icon src={Menu2} theme="solid" class="w-10 h-10" />
 		</button>
-		<a class="btn" href="/"><Avatar src="/cardinal.png" width="w-14" /></a>
+
+		<!-- Logo -->
+		<a class="btn hidden md:inline" href="/"><Avatar src="/cardinal.png" width="w-14" /></a>
 		<strong class="text-xl uppercase">Cardinal</strong>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
 		{#each items as item}
-			<a class="btn" href={item.href}>
-				{item.title}
+			<a href={item.href} target={item.newTab ? '_blank' : '_parent'}>
+				<button class="hidden md:inline btn variant-ghost-tertiary" type="button"
+					>{item.title}</button
+				>
 			</a>
 		{/each}
 		{#if user !== null}
-			<a href={PathNames.logout}>
+			<a href={PathNames.Logout}>
 				<Avatar width="w-14" src={getUserAvatarUrl(user?.id ?? '0', user?.avatar ?? null)} />
 			</a>
 		{:else}
-			<a href={PathNames.login}
+			<a href={PathNames.Login}
 				><button class="btn variant-ghost-primary" type="button">Login</button></a
 			>
 		{/if}

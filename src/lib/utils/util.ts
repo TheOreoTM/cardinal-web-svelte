@@ -46,8 +46,6 @@ export async function cardinalApiFetch<T>(path: ApiPath, options: RequestInit = 
 
 	const jsonResponse = await response.json();
 
-	console.log(jsonResponse);
-
 	if (jsonResponse.error) {
 		throw response;
 	} else {
@@ -64,10 +62,7 @@ export async function cardinalApiFetch<T>(path: ApiPath, options: RequestInit = 
 
 export async function fetchDiscordApi<T>(path: string, options: RequestInit = {}) {
 	const response = await fetch(`${DISCORD_API_URL}${path}`, {
-		...options,
-		headers: {
-			Authorization: `Bot ${DISCORD_TOKEN}`
-		}
+		...options
 	});
 
 	const jsonResponse = await response.json();

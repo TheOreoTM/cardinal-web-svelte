@@ -44,7 +44,7 @@
 	</div>
 	<div>
 		<p class="text-center text-lg">
-			You should be automatically redirected to {pageName}("{to}") in {count ?? 'a few'} seconds.
+			You should be automatically redirected to {pageName ?? ''}("{to}") in {count ?? 'a few'} seconds.
 		</p>
 		<p class="text-center text-lg">
 			Click
