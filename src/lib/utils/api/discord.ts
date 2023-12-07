@@ -1,10 +1,29 @@
 import { DISCORD_CLIENT_SECRET, DISCORD_REDIRECT_URI, DISCORD_TOKEN } from '$env/static/private';
 import type { Cookies } from '@sveltejs/kit';
 import { DISCORD_API_URL, DISCORD_CLIENT_ID } from '../constants';
-import type { PartialGuild } from '$lib/types';
+import type { Guild, PartialGuild } from '$lib/types';
+import type { Snowflake } from 'discord-api-types/v10';
+import { fetchDiscordApi } from '../util';
 
 const ACCESS_TOKEN_COOKIE = 'discord_access_token';
 const REFRESH_TOKEN_COOKIE = 'discord_refresh_token';
+
+export const fetchGuild = async (guildId: Snowflake) => {
+	if (isNaN(Number(guildId))) return null; // Snowflakes should be castable to a number
+
+	const response = await fetch(`${DISCORD_API_URL}/guilds/${guildId}`, {
+		headers: {
+			Authorization: `Bot ${DISCORD_TOKEN}`
+		}
+	});
+
+	const jsonResponse = await response.json();
+	if (jsonResponse.error) {
+		throw response;
+	} else {
+		return jsonResponse;
+	}
+};
 
 export const fetchBotGuilds = async (): Promise<PartialGuild[]> => {
 	const request = await fetch(`${DISCORD_API_URL}/users/@me/guilds`, {
