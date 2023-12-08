@@ -2,6 +2,8 @@
 	import { Autocomplete, InputChip, popup } from '@skeletonlabs/skeleton';
 	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton';
 
+	export let selected: Array<any> = [];
+
 	let inputChip = '';
 	let inputChipList: string[] = ['vanilla', 'chocolate'];
 	const flavorOptions: AutocompleteOption[] = [
@@ -35,12 +37,12 @@
 </div>
 
 <div
-	class="card w-full max-w-sm max-h-48 p-4 overflow-y-auto"
+	class="card w-full max-w-sm max-h-48 p-4 overflow-y-auto z-[1000]"
 	tabindex="-1"
 	data-popup="popupAutocomplete"
 >
 	<Autocomplete
-		bind:input={inputChip}
+		bind:input={selected}
 		options={flavorOptions}
 		denylist={inputChipList}
 		on:selection={onInputChipSelect}

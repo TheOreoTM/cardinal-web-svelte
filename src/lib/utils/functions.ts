@@ -1,4 +1,9 @@
 import { DISCORD_CLIENT_ID } from './constants';
+import { PUBLIC_BASE_WEB_URL } from '$env/static/public';
+
+export function getRedirectUri() {
+	return `${PUBLIC_BASE_WEB_URL}/api/auth/callback`;
+}
 
 export function getUserAvatarUrl(id: string, icon: string | null): string {
 	const url = `https://cdn.discordapp.com/avatars/${id}/${icon}.png`;
@@ -13,7 +18,7 @@ export function generateBotInvite(data?: { guildId?: string; redirectTo?: string
 	);
 
 	if (data?.guildId) baseUrl.searchParams.append('guild_id', data.guildId);
-	if (data?.redirectTo) baseUrl.searchParams.append('redirect_uri', data.redirectTo);
+	if (data?.redirectTo) baseUrl.searchParams.append('redirect_uri', encodeURI(data.redirectTo));
 
 	return baseUrl.toString();
 }

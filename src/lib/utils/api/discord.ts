@@ -1,13 +1,72 @@
 import { DISCORD_CLIENT_SECRET, DISCORD_REDIRECT_URI, DISCORD_TOKEN } from '$env/static/private';
 import type { Cookies } from '@sveltejs/kit';
 import { DISCORD_API_URL, DISCORD_CLIENT_ID } from '../constants';
-import type { Guild, PartialGuild } from '$lib/types';
-import type { Snowflake } from 'discord-api-types/v10';
-import { fetchDiscordApi } from '../util';
+import type { Channel, Guild, PartialGuild } from '$lib/types';
+import type {
+	APIRole,
+	GuildChannelType,
+	RESTGetAPIGuildChannelsResult,
+	Snowflake
+} from 'discord-api-types/v10';
+import type { APIGuildChannel } from 'discord-api-types/v9';
 
 const ACCESS_TOKEN_COOKIE = 'discord_access_token';
 const REFRESH_TOKEN_COOKIE = 'discord_refresh_token';
 
+export const fetchGuildRoles = async (guildId: Snowflake) => {
+	if (isNaN(Number(guildId))) return null; // Snowflakes should be castable to a number
+
+	const response = await fetch(`${DISCORD_API_URL}/guilds/${guildId}/roles`, {
+		headers: {
+			Authorization: `Bot ${DISCORD_TOKEN}`
+		}
+	});
+
+	const jsonResponse = await response.json();
+	if (jsonResponse.error) {
+		console.error('There was an error fetching guild:', guildId);
+		return null;
+	}
+
+	const roles = jsonResponse as APIRole[];
+
+	if (!roles.length) return []; // No roles
+
+	return roles;
+};
+
+/**
+ * Safely fetch a guilds channels, will return null if the guildId doesnt resolve to a number or the guild doesnt exist or bot isnt authorized
+ * @param guildId The id of the guild
+ * @returns
+ */
+export const fetchGuildChannels = async (guildId: Snowflake) => {
+	if (isNaN(Number(guildId))) return null; // Snowflakes should be castable to a number
+
+	const response = await fetch(`${DISCORD_API_URL}/guilds/${guildId}/channels`, {
+		headers: {
+			Authorization: `Bot ${DISCORD_TOKEN}`
+		}
+	});
+
+	const jsonResponse = await response.json();
+	if (jsonResponse.error) {
+		console.error('There was an error fetching guild:', guildId);
+		return null;
+	}
+
+	const channels = jsonResponse as APIGuildChannel<GuildChannelType>[];
+
+	if (!channels.length) return []; // No channels
+
+	return channels;
+};
+
+/**
+ * Safely fetch a guild, will return null if the guildId doesnt resolve to a number or the guild doesnt exist or bot isnt authorized
+ * @param guildId The id of the guild
+ * @returns
+ */
 export const fetchGuild = async (guildId: Snowflake) => {
 	if (isNaN(Number(guildId))) return null; // Snowflakes should be castable to a number
 
@@ -19,10 +78,15 @@ export const fetchGuild = async (guildId: Snowflake) => {
 
 	const jsonResponse = await response.json();
 	if (jsonResponse.error) {
-		throw response;
-	} else {
-		return jsonResponse;
+		console.error('There was an error fetching guild:', guildId);
+		return null;
 	}
+
+	const guild = jsonResponse as Guild;
+
+	if (!guild.id) return null; // The guild doesnt exist
+
+	return guild;
 };
 
 export const fetchBotGuilds = async (): Promise<PartialGuild[]> => {

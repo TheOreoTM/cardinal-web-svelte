@@ -17,6 +17,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import NavbarDropdown from '$lib/components/NavbarDropdown.svelte';
+	import DashboardSidebar from '$lib/components/dashboard/DashboardSidebar.svelte';
 	initializeStores();
 
 	export let data;
@@ -29,7 +30,7 @@
 	<NavbarDropdown /></Drawer
 >
 
-<AppShell slotSidebarLeft="w-0 md:w-52 bg-surface-500/10">
+<AppShell>
 	<!-- Header  -->
 	<svelte:fragment slot="header">
 		<Navbar {user} />
@@ -38,6 +39,10 @@
 	<div class="container p-10 mx-auto">
 		<slot />
 	</div>
+	<!-- Sidebar Left  -->
+	<svelte:fragment slot="sidebarLeft">
+		<DashboardSidebar />
+	</svelte:fragment>
 	<!-- Footer -->
 	<svelte:fragment slot="pageFooter">
 		<Footer />

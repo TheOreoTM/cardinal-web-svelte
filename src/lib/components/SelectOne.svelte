@@ -6,19 +6,25 @@
 		Autocomplete
 	} from '@skeletonlabs/skeleton';
 
+	export let placeholder: string | undefined;
+	export let selected: string | undefined;
+	export let options: Option<T>[];
+	export let id: string;
+	export let onSelect: () => void;
+
+	const randomInt = Math.random();
 	// Local
-	let inputPopup = '';
 	let popupSettings: PopupSettings = {
 		event: 'focus-click',
-		target: 'popupAutocomplete',
+		target: `popup-${randomInt}`,
 		placement: 'bottom'
 	};
 
 	type Option<T> = AutocompleteOption<string, T>;
-	export let options: Option<T>[];
 
 	function onPopupSelect(event: CustomEvent<Option<T>>): void {
-		inputPopup = event.detail.label;
+		selected = event.detail.value;
+		onSelect();
 	}
 </script>
 
@@ -26,16 +32,16 @@
 	<input
 		class="input autocomplete"
 		type="search"
-		name="autocomplete-search"
-		bind:value={inputPopup}
-		placeholder="Search..."
+		name={id}
+		bind:value={selected}
+		placeholder={placeholder ? placeholder : 'Select...'}
 		use:popup={popupSettings}
 	/>
 	<div
-		data-popup="popupAutocomplete"
-		class="card w-full max-w-sm max-h-48 p-4 overflow-y-auto"
+		data-popup={`popup-${randomInt}`}
+		class="card z-[1000] w-full max-w-sm max-h-48 p-4 overflow-y-auto"
 		tabindex="-1"
 	>
-		<Autocomplete bind:input={inputPopup} {options} on:selection={onPopupSelect} />
+		<Autocomplete bind:input={selected} {options} on:selection={onPopupSelect} />
 	</div>
 </div>

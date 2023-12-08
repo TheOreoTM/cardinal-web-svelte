@@ -1,4 +1,4 @@
-import type { APIGuild } from 'discord-api-types/v10';
+import type { APIChannel, APIGuild } from 'discord-api-types/v10';
 
 export type PartialGuild = {
 	id: string;
@@ -26,5 +26,6 @@ export type DiscordUser = {
 };
 
 export type Guild = APIGuild;
+export type Channel = APIChannel;
 
 export type ApiPath = `discord/guilds/${string}` | 'oauth/callback' | 'status';
