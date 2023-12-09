@@ -1,40 +1,29 @@
 import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/public';
-import { fetchBotGuilds, fetchGuild, fetchUserGuilds } from '$lib/utils/api/discord';
-import { getOrRefreshToken } from '$lib/server/discord';
-import { PathNames } from '$lib/utils/constants';
+import type { OauthFlattenedGuild } from '$lib/utils/api/types';
 
 export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
-	const accessToken = await getOrRefreshToken(event);
-	if (!accessToken) {
+	const cookie = event.cookies.get(env.PUBLIC_COOKIE!);
+	if (!cookie || !event.locals.user) {
 		return new Response(undefined, {
 			status: 302,
-			headers: { location: PathNames.Login }
+			headers: { location: '/oauth/discord/login' }
 		});
 	}
 
-	const userGuilds = await fetchUserGuilds(accessToken);
-
-	if (!userGuilds) {
-		event.locals.guilds = { mutual: [], unmutual: [] };
+	const transformedGuilds = event.locals.guilds ?? [];
+	const guilds = new Map<string, OauthFlattenedGuild>();
+	for (const guild of transformedGuilds) {
+		guilds.set(guild.id, { ...guild });
 	}
 
-	const userManageableGuilds = userGuilds.filter((g) => (Number(g.permissions) & 0x20) === 0x20);
-	const botGuilds = await fetchBotGuilds();
-	const mutualGuilds = userManageableGuilds.filter((g) => botGuilds.some((bg) => g.id === bg.id));
-	const unmutualGuilds = userManageableGuilds.filter(
-		(guild) => !mutualGuilds.some((mguild) => mguild.id === guild.id)
-	);
-
-	event.locals.guilds = { mutual: mutualGuilds, unmutual: unmutualGuilds };
-
 	if (event.params.guildId) {
-		const guild = await fetchGuild(event.params.guildId);
+		const guild = guilds.get(event.params.guildId);
+
 		if (!guild) {
-			console.log('No guild');
 			return new Response(undefined, {
 				status: 302,
-				headers: { location: PathNames.Manage }
+				headers: { location: '/guilds' }
 			});
 		}
 

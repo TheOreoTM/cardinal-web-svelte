@@ -1,15 +1,15 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
-import type { DiscordUser, Guild, PartialGuild } from '$lib/types';
+import type { OauthFlattenedGuild, TransformedLoginData } from '$lib/utils/api/types';
 
 declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			user: DiscordUser | null;
-			guild: Guild | null;
-			guilds: { mutual: PartialGuild[]; unmutual: PartialGuild[] } | null;
+			user: TransformedLoginData['user'] | undefined;
+			guilds: TransformedLoginData['transformedGuilds'] | undefined;
+			guild: OauthFlattenedGuild | undefined;
 		}
 
 		// interface PageData {}

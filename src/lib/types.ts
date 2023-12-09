@@ -27,5 +27,3 @@ export type DiscordUser = {
 
 export type Guild = APIGuild;
 export type Channel = APIChannel;
-
-export type ApiPath = `discord/guilds/${string}` | 'oauth/callback' | 'status';

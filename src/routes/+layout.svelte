@@ -18,10 +18,11 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import NavbarDropdown from '$lib/components/NavbarDropdown.svelte';
 	import DashboardSidebar from '$lib/components/dashboard/DashboardSidebar.svelte';
+	import { activeUser } from '$lib/stores';
 	initializeStores();
 
 	export let data;
-	const user = data.user;
+	$: user = data.user;
 </script>
 
 <Toast />
