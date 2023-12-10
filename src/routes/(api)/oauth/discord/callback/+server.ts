@@ -12,22 +12,27 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 	console.log(REDIRECT_URI);
 
 	try {
+		const body = JSON.stringify({
+			code: code,
+			redirectUri: REDIRECT_URI
+		});
+
+		console.log('body', body);
+
 		const response = await fetch(`${BASE_CARDINAL_API_URL}/oauth/callback`, {
 			method: 'POST',
 			credentials: 'include',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				code,
-				redirectUri: REDIRECT_URI
-			})
+			body: body
 		});
 
-		console.log('response', await response.json());
+		const responseBody = await response.json();
+		console.log('response', responseBody);
 
-		const logindata = (await response.json()) as TransformedLoginData;
+		const logindata = responseBody as TransformedLoginData;
 		const newCookie = response.headers.get('set-cookie');
 
-		console.log('code', code);
+		console.log('code', code, typeof code);
 		console.log('newCookie', newCookie);
 
 		const result = validateNewCookie(newCookie);
