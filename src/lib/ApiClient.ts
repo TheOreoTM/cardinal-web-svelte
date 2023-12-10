@@ -26,7 +26,7 @@ export class ApiClient {
 	static async fetchUser() {
 		const response = await this.fetch<TransformedLoginData>('users/@me');
 
-		console.log(response);
+		console.log('fetchUser', response);
 		return response;
 	}
 }
