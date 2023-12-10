@@ -17,8 +17,6 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 			redirectUri: REDIRECT_URI
 		});
 
-		console.log('body', body);
-
 		const response = await fetch(`${BASE_CARDINAL_API_URL}/oauth/callback`, {
 			method: 'POST',
 			credentials: 'include',

@@ -15,7 +15,7 @@
 	// Components & Utilities
 	import { AppShell, Modal, Toast, initializeStores } from '@skeletonlabs/skeleton';
 	import Footer from '$lib/components/Footer.svelte';
-	import Navbar from '$lib/components/Navbar.svelte';
+	import Navbar from '$lib/components/Navbar2.svelte';
 	import NavbarDropdown from '$lib/components/NavbarDropdown.svelte';
 	import DashboardSidebar from '$lib/components/dashboard/DashboardSidebar.svelte';
 	initializeStores();
