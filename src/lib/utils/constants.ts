@@ -6,7 +6,7 @@ export const DISCORD_CLIENT_ID = '740962735306702858';
 
 export const oauthURL = new URL(DISCORD_OAUTH_URL);
 oauthURL.search = new URLSearchParams([
-	['redirect_uri', `${PUBLIC_BASE_WEB_URL}/oauth/discord/callback`],
+	['redirect_uri', `${PUBLIC_BASE_WEB_URL}/oauth/callback`],
 	['response_type', 'code'],
 	['scope', ['identify', 'guilds'].join(' ')],
 	['client_id', DISCORD_CLIENT_ID]
@@ -16,9 +16,9 @@ export const DISCORD_AUTHORIZATION_URL = oauthURL.toString();
 export const PathNames = {
 	Index: '/',
 	Manage: '/manage',
-	Logout: `/oauth/discord/logout`,
-	Login: `/oauth/discord/login`,
-	Callback: `/oauth/discord/callback`,
+	Logout: `/oauth/logout`,
+	Login: `/oauth/login`,
+	Callback: `/oauth/callback`,
 	Status: `https://status.oreotm.xyz`
 };
 

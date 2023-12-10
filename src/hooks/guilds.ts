@@ -1,13 +1,14 @@
 import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/public';
 import type { OauthFlattenedGuild } from '$lib/utils/api/types';
+import { PathNames } from '$lib/utils/constants';
 
 export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
 	const cookie = event.cookies.get(env.PUBLIC_COOKIE!);
 	if (!cookie || !event.locals.user) {
 		return new Response(undefined, {
 			status: 302,
-			headers: { location: '/oauth/discord/login' }
+			headers: { location: PathNames.Login }
 		});
 	}
 

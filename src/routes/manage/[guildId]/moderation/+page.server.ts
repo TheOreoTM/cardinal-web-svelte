@@ -1,5 +1,3 @@
-import { currentGuild } from '$lib/stores';
-import { fetchGuildChannels } from '$lib/utils/api/discord';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
