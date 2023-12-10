@@ -9,6 +9,8 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 	const code = url.searchParams.get('code') ?? null;
 	if (!code) return sendToHome();
 
+	console.log(REDIRECT_URI);
+
 	try {
 		const response = await fetch(`${BASE_CARDINAL_API_URL}/oauth/callback`, {
 			method: 'POST',
@@ -20,10 +22,13 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 			})
 		});
 
+		console.log('response', await response.json());
+
 		const logindata = (await response.json()) as TransformedLoginData;
 		const newCookie = response.headers.get('set-cookie');
 
-		console.log(newCookie);
+		console.log('code', code);
+		console.log('newCookie', newCookie);
 
 		const result = validateNewCookie(newCookie);
 		if (!result || !logindata.user) return sendToOAuthError();
