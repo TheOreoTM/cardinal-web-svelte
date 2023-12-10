@@ -25,13 +25,13 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 		});
 
 		const responseBody = await response.json();
-		console.log('response', responseBody);
 
 		const logindata = responseBody as TransformedLoginData;
 		const newCookie = response.headers.get('set-cookie');
 
-		console.log('code', code, typeof code);
-		console.log('newCookie', newCookie);
+		console.log('response', responseBody); // returns {error: 'Bad Request'}
+		console.log('code', code, typeof code); // returns <code>
+		console.log('newCookie', newCookie); // returns null
 
 		const result = validateNewCookie(newCookie);
 		if (!result || !logindata.user) return sendToOAuthError();

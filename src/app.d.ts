@@ -5,6 +5,15 @@ import type { OauthFlattenedGuild, TransformedLoginData } from '$lib/utils/api/t
 
 declare global {
 	namespace App {
+		interface Platform {
+			env: {
+				COUNTER: DurableObjectNamespace;
+			};
+			context: {
+				waitUntil(promise: Promise<any>): void;
+			};
+			caches: CacheStorage & { default: Cache };
+		}
 		// interface Error {}
 		interface Locals {
 			user: TransformedLoginData['user'] | undefined;
@@ -13,7 +22,6 @@ declare global {
 		}
 
 		// interface PageData {}
-		// interface Platform {}
 	}
 }
 
