@@ -35,12 +35,11 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 
 	try {
 		const userRes = await ApiClient.fetchUser();
+		console.log('userRes', userRes);
 
 		event.locals.user = userRes.user
 			? { ...userRes.user } //
 			: undefined;
-
-		console.log('userRes', userRes);
 
 		if (event.url.pathname.startsWith('/manage')) {
 			return handleGuildsRoute({ event, resolve });
