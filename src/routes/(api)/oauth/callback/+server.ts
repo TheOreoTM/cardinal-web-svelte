@@ -9,8 +9,6 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 	const code = url.searchParams.get('code') ?? null;
 	if (!code) return sendToHome();
 
-	console.log(REDIRECT_URI);
-
 	try {
 		const body = JSON.stringify({
 			code: code,
@@ -28,10 +26,6 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 
 		const logindata = responseBody as TransformedLoginData;
 		const newCookie = response.headers.get('set-cookie');
-
-		console.log('response', responseBody); // returns {error: 'Bad Request'}
-		console.log('code', code, typeof code); // returns <code>
-		console.log('newCookie', newCookie); // returns null
 
 		const result = validateNewCookie(newCookie);
 		if (!result || !logindata.user) return sendToOAuthError();

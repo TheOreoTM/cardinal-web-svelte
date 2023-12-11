@@ -17,7 +17,6 @@
 
 		const data = Object.fromEntries(event.formData);
 		const [key, value] = Object.entries(data)[0];
-		console.log(key, value);
 		event.formData.set('value', value);
 
 		return async function ({ update, result }) {
