@@ -1,17 +1,3 @@
-// import { authenticateUser } from '$lib/server/discord';
-// import type { Handle } from '@sveltejs/kit';
-// import { redirect } from '@sveltejs/kit';
-
-// export const handle: Handle = async ({ event, resolve }) => {
-// 	event.locals.user = await authenticateUser(event);
-// 	if (event.url.pathname.startsWith('/manage')) {
-// 		if (!event.locals.user) {
-// 			throw redirect(302, '/api/discord/login');
-// 		}
-// 	}
-// 	return resolve(event);
-// };
-
 import { handleGuildsRoute } from './hooks/guilds';
 import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle } from '@sveltejs/kit';
@@ -35,8 +21,6 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 
 	try {
 		const userRes = await ApiClient.fetchUser();
-		console.log('userRes');
-		console.log(userRes);
 
 		event.locals.user = userRes.user
 			? { ...userRes.user } //

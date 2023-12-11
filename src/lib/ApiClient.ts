@@ -15,6 +15,7 @@ export class ApiClient {
 		});
 
 		const jsonResponse = await response.json();
+		console.log('jsonResponse', jsonResponse);
 
 		if (jsonResponse.error) {
 			throw response;
@@ -26,8 +27,6 @@ export class ApiClient {
 	static async fetchUser() {
 		const response = await this.fetch<TransformedLoginData>('users/@me');
 
-		console.log('fetchUser');
-		console.log(response);
 		return response;
 	}
 }
