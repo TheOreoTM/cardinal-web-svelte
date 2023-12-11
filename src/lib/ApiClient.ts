@@ -1,4 +1,5 @@
 import { CARDINAL_API_URL } from '$env/static/private';
+import { methods } from '@sapphire/plugin-api';
 import type { ApiPath, TransformedLoginData } from './utils/api/types';
 
 export class ApiClient {
@@ -25,7 +26,7 @@ export class ApiClient {
 	}
 
 	static async fetchUser() {
-		const response = await this.fetch<TransformedLoginData>('users/@me');
+		const response = await this.fetch<TransformedLoginData>('users/@me', { method: 'POST' });
 
 		return response;
 	}
