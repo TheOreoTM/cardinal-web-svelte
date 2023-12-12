@@ -1,10 +1,8 @@
 import { CARDINAL_API_URL } from '$env/static/private';
 import type { ApiPath, TransformedLoginData } from './utils/api/types';
 
-export class ApiClient {
-	public constructor() {}
-
-	private static async fetch<T>(path: ApiPath, options: RequestInit = {}) {
+export namespace ApiClient {
+	async function fetchApi<T>(path: ApiPath, options: RequestInit = {}) {
 		const response = await fetch(`${CARDINAL_API_URL}${path}`, {
 			...options,
 			credentials: 'include',
@@ -24,8 +22,8 @@ export class ApiClient {
 		}
 	}
 
-	static async fetchUser() {
-		const response = await this.fetch<TransformedLoginData>('users/@me');
+	export async function fetchUser() {
+		const response = await fetchApi<TransformedLoginData>('users/@me');
 
 		return response;
 	}
