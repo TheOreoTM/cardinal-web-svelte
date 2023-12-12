@@ -14,11 +14,12 @@ export async function apiFetch<T>(path: ApiPath, options: RequestInit = {}) {
 		credentials: 'same-origin',
 		headers: {
 			...options.headers,
-			'Content-Type': 'application/json'
+			'content-type': 'application/json'
 		}
 	});
 
 	const jsonResponse = await response.json();
+	console.log('🚀 ~ file: util.ts:22 ~ jsonResponse:', jsonResponse);
 
 	if (jsonResponse.error) {
 		throw response;
