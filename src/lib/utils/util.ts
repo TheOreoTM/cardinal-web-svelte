@@ -1,4 +1,4 @@
-import { BASE_CARDINAL_API_URL } from '$env/static/private';
+import { CARDINAL_API_URL } from '$env/static/private';
 import type { ApiPath } from './api/types';
 
 /**
@@ -8,7 +8,7 @@ import type { ApiPath } from './api/types';
  * @returns
  */
 export async function apiFetch<T>(path: ApiPath, options: RequestInit = {}) {
-	const response = await fetch(`${BASE_CARDINAL_API_URL}${path}`, {
+	const response = await fetch(`${CARDINAL_API_URL}${path}`, {
 		...options,
 		credentials: 'include',
 		headers: {
