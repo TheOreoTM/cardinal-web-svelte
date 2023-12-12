@@ -14,7 +14,8 @@ export async function apiFetch<T>(path: ApiPath, options: RequestInit = {}) {
 		credentials: 'same-origin',
 		headers: {
 			...options.headers,
-			'content-type': 'application/json'
+			Accept: 'application/json',
+			'Content-Type': 'application/json'
 		}
 	});
 
