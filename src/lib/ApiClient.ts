@@ -5,7 +5,7 @@ export namespace ApiClient {
 	async function fetchApi<T>(path: ApiPath, options: RequestInit = {}) {
 		const response = await fetch(`${CARDINAL_API_URL}${path}`, {
 			...options,
-			credentials: 'include',
+			credentials: 'same-origin',
 			headers: {
 				...options.headers,
 				'Content-Type': 'application/json'

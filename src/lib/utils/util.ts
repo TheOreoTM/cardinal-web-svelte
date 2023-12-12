@@ -11,11 +11,10 @@ import { DISCORD_API_URL } from './constants';
 export async function apiFetch<T>(path: ApiPath, options: RequestInit = {}) {
 	const response = await fetch(`${API_URL}${path}`, {
 		...options,
-		credentials: 'include',
+		credentials: 'same-origin',
 		headers: {
 			...options.headers,
-			'Content-Type': 'application/json',
-			Authorization: `Bot ${DISCORD_TOKEN}`
+			'Content-Type': 'application/json'
 		}
 	});
 
