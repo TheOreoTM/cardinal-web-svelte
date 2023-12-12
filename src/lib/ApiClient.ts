@@ -3,7 +3,9 @@ import { apiFetch } from './utils/util';
 
 export namespace ApiClient {
 	export async function fetchUser() {
-		const response = await apiFetch<TransformedLoginData>('users/@me');
+		const response = await apiFetch<TransformedLoginData>('users/@me', {
+			method: 'GET'
+		});
 
 		return response;
 	}
