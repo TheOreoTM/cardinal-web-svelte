@@ -13,7 +13,7 @@ export async function apiFetch<T>(path: ApiPath, options: RequestInit = {}) {
 		credentials: 'include',
 		headers: {
 			...options.headers,
-			Accept: 'application/json',
+			Cookie: '',
 			'Content-Type': 'application/json'
 		}
 	});

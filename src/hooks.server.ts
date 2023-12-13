@@ -20,7 +20,7 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 	}
 
 	try {
-		const userRes = await ApiClient.fetchUser();
+		const userRes = await ApiClient.fetchUser(`CARDINAL_AUTH=${cookie}`);
 
 		event.locals.user = userRes.user
 			? { ...userRes.user } //
