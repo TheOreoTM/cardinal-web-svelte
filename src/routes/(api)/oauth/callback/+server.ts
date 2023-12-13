@@ -40,7 +40,7 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 			}
 		});
 	} catch (err: unknown) {
-		console.error(err);
+		console.error('Login Error:', err);
 		return sendToOAuthError();
 	}
 };
