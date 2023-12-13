@@ -4,6 +4,7 @@ import { sendToHome, sendToOAuthError } from '$lib/utils/api/other';
 import { PathNames, REDIRECT_URI } from '$lib/utils/constants';
 import type { TransformedLoginData } from '$lib/utils/api/types';
 import { apiFetch } from '$lib/utils/util';
+import { BASE_CARDINAL_API_URL } from '$env/static/private';
 
 export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 	const code = url.searchParams.get('code') ?? null;
@@ -15,9 +16,12 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 			redirectUri: REDIRECT_URI
 		});
 
-		const response = await apiFetch<Response>('oauth/callback', {
+		const response = await fetch(`${BASE_CARDINAL_API_URL}/oauth/callback`, {
 			method: 'POST',
-			body: body
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json'
+			}
 		});
 
 		const responseBody = await response.json();
