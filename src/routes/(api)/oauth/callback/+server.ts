@@ -19,6 +19,7 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 		const response = await fetch(`${BASE_CARDINAL_API_URL}/oauth/callback`, {
 			method: 'POST',
 			credentials: 'include',
+			body,
 			headers: {
 				'Content-Type': 'application/json'
 			}
