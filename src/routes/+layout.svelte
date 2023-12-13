@@ -43,9 +43,7 @@
 		<slot />
 	</div>
 	<!-- Sidebar Left  -->
-	<svelte:fragment slot="sidebarLeft">
-		<DashboardSidebar />
-	</svelte:fragment>
+	<svelte:fragment slot="sidebarLeft"></svelte:fragment>
 	<!-- Footer -->
 	<svelte:fragment slot="pageFooter">
 		<Footer />
