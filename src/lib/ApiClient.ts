@@ -3,10 +3,11 @@ import { apiFetch } from './utils/util';
 
 export namespace ApiClient {
 	export async function fetchUser(cookie: string) {
+		console.log(cookie);
 		const response = await apiFetch<TransformedLoginData>('users/@me', {
 			method: 'GET',
 			headers: {
-				Cookie: `${cookie}`
+				Cookie: cookie
 			}
 		});
 
