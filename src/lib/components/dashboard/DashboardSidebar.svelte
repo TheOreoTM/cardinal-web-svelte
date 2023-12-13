@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { currentGuild } from '$lib/stores';
 	import { PathNames } from '$lib/utils/constants';
 	import { getGuildAvatarUrl } from '$lib/utils/functions';
 	import { AppRail, AppRailAnchor, Avatar } from '@skeletonlabs/skeleton';
+	import { getCurrentGuildContext } from 'stores';
 
 	const modules: { name: string; link: string; icon: string }[] = [
 		{ name: 'Setting', link: '/setting', icon: 'fa-gear' },
@@ -11,6 +11,8 @@
 		{ name: 'Utility', link: '/utility', icon: 'fa-screwdriver-wrench' },
 		{ name: 'Logs', link: '/logging', icon: 'fa-pen-to-square' }
 	];
+
+	let currentGuild = getCurrentGuildContext();
 
 	let currentTile: number = 0;
 
