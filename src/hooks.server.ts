@@ -3,6 +3,7 @@ import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/public';
 import { ApiClient } from '$lib/ApiClient';
+import { PathNames } from '$lib/utils/constants';
 
 const protectedRoutes = ['/manage'];
 
@@ -12,7 +13,7 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 		if (protectedRoutes.some((route) => event.url.pathname.startsWith(route))) {
 			return new Response(undefined, {
 				status: 302,
-				headers: { location: '/oauth/discord/login' }
+				headers: { location: PathNames.Login }
 			});
 		}
 
@@ -22,6 +23,7 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 	try {
 		const userRes = await ApiClient.fetchUser(`CARDINAL_AUTH=${cookie}`);
 
+		console.log(userRes);
 		event.locals.user = userRes.user
 			? { ...userRes.user } //
 			: undefined;

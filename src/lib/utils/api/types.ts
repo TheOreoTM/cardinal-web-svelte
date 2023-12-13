@@ -78,7 +78,7 @@ interface FlattenedEmoji {
 	roles: any[];
 }
 
-interface FlattenedRole {
+export interface FlattenedRole {
 	color: number;
 
 	guildId: string;

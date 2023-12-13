@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Meta from '$lib/components/Meta.svelte';
-	import SelectOne from '$lib/components/SelectOne.svelte';
-	import SettingsForm from '$lib/components/SettingsForm.svelte';
+	import SelectOne from '$lib/components/selects/SelectOne.svelte';
+	import SettingsForm from '$lib/components/dashboard/SettingsForm.svelte';
 	import SettingsRow from '$lib/components/dashboard/SettingsRow.svelte';
 	import Label from '$lib/components/forms/Label.svelte';
 	import { SlideToggle, type AutocompleteOption } from '@skeletonlabs/skeleton';

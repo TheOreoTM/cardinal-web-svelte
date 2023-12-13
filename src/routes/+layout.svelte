@@ -15,16 +15,19 @@
 	// Components & Utilities
 	import { AppShell, Modal, Toast, initializeStores } from '@skeletonlabs/skeleton';
 	import Footer from '$lib/components/Footer.svelte';
-	import Navbar from '$lib/components/Navbar.svelte';
-	import NavbarDropdown from '$lib/components/NavbarDropdown.svelte';
+	import Navbar from '$lib/components/navigation/Navbar.svelte';
+	import NavbarDropdown from '$lib/components/navigation/NavbarDropdown.svelte';
 	import DashboardSidebar from '$lib/components/dashboard/DashboardSidebar.svelte';
-	initializeStores();
+	import type { LayoutServerData } from './$types';
+	import { createUserContext } from '$lib/stores';
 
-	export let data;
-	$: user = data.user;
+	export let data: LayoutServerData;
+
+	initializeStores();
+	createUserContext(data.user);
 </script>
 
-<Toast />
+<Toast position="br" />
 <Modal />
 <Drawer>
 	<NavbarDropdown /></Drawer
@@ -33,7 +36,7 @@
 <AppShell>
 	<!-- Header  -->
 	<svelte:fragment slot="header">
-		<Navbar {user} />
+		<Navbar />
 	</svelte:fragment>
 	<!-- Page Content -->
 	<div class="container p-10 mx-auto">

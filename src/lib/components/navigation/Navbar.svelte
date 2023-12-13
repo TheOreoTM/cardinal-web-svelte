@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { NavbarItems } from '$lib/utils/config';
 	import { AppBar, Avatar, getDrawerStore, type DrawerSettings } from '@skeletonlabs/skeleton';
-	import { PathNames } from '$lib/utils/constants';
-	import { getUserAvatarUrl } from '$lib/utils/functions';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Menu2 } from '@steeze-ui/tabler-icons';
-	import type { TransformedLoginData } from '$lib/utils/api/types';
+	import UserInfo from '$lib/components/auth/UserInfo.svelte';
 
 	const drawerStore = getDrawerStore();
 	function openSidebar() {
@@ -19,7 +17,6 @@
 		drawerStore.open(s);
 	}
 
-	export let user: TransformedLoginData['user'] | undefined;
 	const items = NavbarItems;
 </script>
 
@@ -41,14 +38,6 @@
 				>
 			</a>
 		{/each}
-		{#if user}
-			<a href={PathNames.Logout}>
-				<Avatar width="w-14" src={getUserAvatarUrl(user?.id ?? '0', user?.avatar ?? null)} />
-			</a>
-		{:else}
-			<a href={PathNames.Login}
-				><button class="btn variant-ghost-primary" type="button">Login</button></a
-			>
-		{/if}
+		<UserInfo />
 	</svelte:fragment>
 </AppBar>

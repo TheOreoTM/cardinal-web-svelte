@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { getExtendedToastStore } from '$lib/utils/toast';
 	import type { SubmitFunction } from '@sveltejs/kit';
-	import SettingsCard from './dashboard/SettingsCard.svelte';
+	import SettingsCard from './SettingsCard.svelte';
 
 	const toast = getExtendedToastStore();
 
