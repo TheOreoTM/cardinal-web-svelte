@@ -2,17 +2,13 @@
 	import Meta from '$lib/components/Meta.svelte';
 	import { generateBotInvite, getGuildAvatarUrl } from '$lib/utils/functions.js';
 	import { Avatar, Noir, filter } from '@skeletonlabs/skeleton';
-
-	export let data;
-	const mutualGuilds = data.mutualGuilds;
-	const unmutualGuilds = data.unmutualGuilds;
 </script>
 
 <Noir />
 
 <Meta title="Select a guild" />
 
-{#if mutualGuilds}
+<!-- {#if mutualGuilds}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
 		{#each mutualGuilds as guild}
 			<a
@@ -50,4 +46,6 @@
 	</div>
 {:else}
 	{'No beans :('}
-{/if}
+{/if} -->
+
+Hold on

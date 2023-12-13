@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { activeUser } from '$lib/stores';
 	import { getModalStore, getToastStore } from '@skeletonlabs/skeleton';
 	const toastStore = getToastStore();
 	const modalStore = getModalStore();
@@ -15,8 +14,6 @@
 		});
 	};
 
-	export let data;
-	$: user = data.user;
 	const triggerToast = (message?: string) => {
 		toastStore.trigger({
 			message: message ? message : 'Changes Saved Successfully',
@@ -27,9 +24,7 @@
 
 <div class="container h-full mx-auto gap-8 flex flex-col">
 	<div class="flex items-center justify-between">
-		Wait aint you {user}?
-		{JSON.stringify(user, null, 2)}
-
+		Hello
 		<button class="btn variant-filled-primary" on:click={() => triggerModal()}>Save changes</button>
 	</div>
 </div>

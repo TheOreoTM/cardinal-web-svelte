@@ -17,10 +17,9 @@
 	let currentTile: number = 0;
 
 	$: module = modules.find((m) => `/manage/${$currentGuild?.id}${m.link}` === $page.url.pathname);
-	$: shouldDisplay = $page.url.pathname?.includes(`${PathNames.Manage}/`);
 </script>
 
-<AppRail class={shouldDisplay ? '' : 'hidden'}>
+<AppRail>
 	<AppRailAnchor value={'home'} href={`/manage/${$currentGuild?.id}`} title="Home">
 		<div class="flex justify-center">
 			<Avatar

@@ -1,17 +1,14 @@
-import { fetchGuild, fetchGuildChannels, fetchGuildRoles } from '$lib/utils/api/discord';
 import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
-import { PathNames } from '$lib/utils/constants';
+import { env } from '$env/dynamic/public';
 
-export const load = (async ({ params }) => {
-	const guild = await fetchGuild(params.guildId);
-	const channels = await fetchGuildChannels(params.guildId);
-	const roles = await fetchGuildRoles(params.guildId);
-	if (!guild) throw redirect(301, PathNames.Manage);
+export const load = (async ({ locals, cookies }) => {
+	const cookie = cookies.get(env.PUBLIC_COOKIE!);
+	if (!cookie || !locals.guild) {
+		throw redirect(302, '/manage');
+	}
 
 	return {
-		guild,
-		channels,
-		roles
+		guild: locals.guild
 	};
 }) satisfies LayoutServerLoad;
