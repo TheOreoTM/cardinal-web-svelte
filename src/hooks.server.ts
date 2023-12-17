@@ -13,24 +13,26 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 	const cookie = event.cookies.get(env.PUBLIC_COOKIE!);
 	if (!cookie) {
 		if (protectedRoutes.some((route) => event.url.pathname.startsWith(route))) {
-			return new Response(undefined, {
-				status: 302,
-				headers: { location: PathNames.Login }
-			});
+			return sendToLogin();
 		}
 
 		return resolve(event);
 	}
 
 	try {
-		const userRes = (await event.fetch(`${BASE_CARDINAL_API_URL}/users/@me`, {
+		const response = await event.fetch(`${BASE_CARDINAL_API_URL}/users/@me`, {
 			credentials: 'include',
 			method: 'GET',
 			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json'
+				'Content-Type': 'application/json'
 			}
-		})) as TransformedLoginData;
+		});
+
+		if (!response.ok) {
+			return sendToLogin();
+		}
+
+		const userRes = (await response.json()) as TransformedLoginData;
 
 		// const userRes = await ApiClient.fetchUser(`CARDINAL_AUTH=${cookie}`);
 
@@ -53,3 +55,10 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 };
 
 export const handle: Handle = sequence(handleAll);
+
+function sendToLogin() {
+	return new Response(undefined, {
+		status: 302,
+		headers: { location: PathNames.Login }
+	});
+}
