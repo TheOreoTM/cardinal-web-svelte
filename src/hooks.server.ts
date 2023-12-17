@@ -4,6 +4,8 @@ import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/public';
 import { ApiClient } from '$lib/ApiClient';
 import { PathNames } from '$lib/utils/constants';
+import { BASE_CARDINAL_API_URL } from '$env/static/private';
+import type { TransformedLoginData } from '$lib/utils/api/types';
 
 const protectedRoutes = ['/manage'];
 
@@ -21,7 +23,10 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 	}
 
 	try {
-		const userRes = await ApiClient.fetchUser(`CARDINAL_AUTH=${cookie}`);
+		const userRes = (await event.fetch(`${BASE_CARDINAL_API_URL}/users/@me`, {
+			credentials: 'include',
+			method: 'GET'
+		})) as TransformedLoginData;
 
 		console.log('userRes', userRes);
 		event.locals.user = userRes.user

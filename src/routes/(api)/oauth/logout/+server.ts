@@ -9,7 +9,7 @@ export const GET: RequestHandler = async ({ fetch, locals }) => {
 		throw error(401);
 	}
 
-	const response = await fetch(`${env.BASE_API_URL}/oauth/logout`, {
+	const response = await fetch(`${env.BASE_CARDINAL_API_URL}/oauth/logout`, {
 		method: 'POST',
 		credentials: 'include'
 	});

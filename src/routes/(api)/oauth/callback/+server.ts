@@ -3,7 +3,6 @@ import { validateNewCookie } from '$lib/utils/auth';
 import { sendToHome, sendToOAuthError } from '$lib/utils/api/other';
 import { PathNames, REDIRECT_URI } from '$lib/utils/constants';
 import type { TransformedLoginData } from '$lib/utils/api/types';
-import { apiFetch } from '$lib/utils/util';
 import { BASE_CARDINAL_API_URL } from '$env/static/private';
 
 export const GET: RequestHandler = async ({ locals, url, fetch }) => {
