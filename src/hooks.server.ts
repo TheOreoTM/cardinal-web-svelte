@@ -25,7 +25,10 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 	try {
 		const userRes = (await event.fetch(`${BASE_CARDINAL_API_URL}/users/@me`, {
 			credentials: 'include',
-			method: 'GET'
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
 		})) as TransformedLoginData;
 
 		console.log('userRes - hooks.server.ts', userRes);

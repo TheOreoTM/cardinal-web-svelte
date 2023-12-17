@@ -21,7 +21,10 @@ export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
 
 	const userRes = (await event.fetch(`${BASE_CARDINAL_API_URL}/users/@me`, {
 		credentials: 'include',
-		method: 'GET'
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
 	})) as unknown as { user: User; guilds: FlattenedGuild[] };
 
 	console.log('userRes - guilds.ts', userRes);
