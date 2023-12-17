@@ -23,13 +23,15 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 	}
 
 	try {
-		const userRes = (await event.fetch(`${BASE_CARDINAL_API_URL}/users/@me`, {
-			credentials: 'include',
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})) as TransformedLoginData;
+		// 	const userRes = (await event.fetch(`${BASE_CARDINAL_API_URL}/users/@me`, {
+		// 		credentials: 'include',
+		// 		method: 'GET',
+		// 		headers: {
+		// 			'Content-Type': 'application/json'
+		// 		}
+		// })) as TransformedLoginData;
+
+		const userRes = await ApiClient.fetchUser(`CARDINAL_AUTH=${cookie}`);
 
 		console.log('userRes - hooks.server.ts', userRes);
 		event.locals.user = userRes.user
