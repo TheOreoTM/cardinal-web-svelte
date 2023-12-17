@@ -32,9 +32,6 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 		const result = validateNewCookie(newCookie);
 		if (!result || !logindata.user) return sendToOAuthError();
 
-		locals.user = logindata.user;
-		console.log('🚀 ~ file: +server.ts:36 ~ constGET:RequestHandler= ~ logindata:', logindata);
-
 		return new Response(undefined, {
 			status: 302,
 			headers: {
