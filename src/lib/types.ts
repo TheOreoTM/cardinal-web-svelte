@@ -1,4 +1,5 @@
-import type { APIChannel, APIGuild } from 'discord-api-types/v10';
+import type { FlattenedGuild } from '$lib/utils/api/types';
+import type { APIChannel } from 'discord-api-types/v10';
 
 export type PartialGuild = {
 	id: string;
@@ -25,5 +26,7 @@ export type DiscordUser = {
 	public_flags: number;
 };
 
-export type Guild = APIGuild;
 export type Channel = APIChannel;
+
+export type Guilds = Map<string, FlattenedGuild>;
+export type Guild = FlattenedGuild;

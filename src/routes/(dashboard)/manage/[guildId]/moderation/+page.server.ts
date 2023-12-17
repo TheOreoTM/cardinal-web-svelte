@@ -2,6 +2,7 @@ import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
 	// Fetch cardinal data
+
 	return {};
 }) satisfies PageServerLoad;
 

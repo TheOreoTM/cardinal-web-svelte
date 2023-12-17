@@ -1,6 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
+import type { Guild, Guilds } from '$lib/types';
 import type { OauthFlattenedGuild, TransformedLoginData } from '$lib/utils/api/types';
 
 declare global {
@@ -17,8 +18,8 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			user: TransformedLoginData['user'] | undefined;
-			guilds: TransformedLoginData['transformedGuilds'] | undefined;
-			guild: OauthFlattenedGuild | undefined;
+			guilds: Guilds | undefined;
+			guild: Guild | undefined;
 		}
 
 		// interface PageData {}

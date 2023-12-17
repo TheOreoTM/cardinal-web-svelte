@@ -8,7 +8,7 @@ import type {
 import type { Guild, PermissionOverwrites } from 'discord.js';
 
 export type ApiPath =
-	| `discord/guilds/${Snowflake}`
+	| `guilds/${string}`
 	| 'oauth/callback'
 	| 'oauth/refresh'
 	| 'status'
@@ -18,7 +18,7 @@ export interface TransformedLoginData extends LoginData {
 	transformedGuilds?: OauthFlattenedGuild[];
 }
 
-interface FlattenedGuild
+export interface FlattenedGuild
 	extends Pick<
 		Guild,
 		| 'afkChannelId'
@@ -283,5 +283,5 @@ export interface OauthFlattenedGuild extends PartialOauthFlattenedGuild {
 
 	permissions: number;
 
-	skyraIsIn: boolean;
+	cardinalIsIn: boolean;
 }

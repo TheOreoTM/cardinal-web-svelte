@@ -1,6 +1,6 @@
 <script lang="ts">
+	import type { LayoutData } from './$types';
 	import { createCurrentGuildContext, createGuildsContext } from 'stores';
-	import type { LayoutData } from './[guildId]/$types';
 
 	export let data: LayoutData;
 

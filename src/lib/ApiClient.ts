@@ -12,4 +12,8 @@ export namespace ApiClient {
 
 		return response;
 	}
+
+	export async function fetchGuilds(userId: string) {
+		const response = await apiFetch('users/@me');
+	}
 }

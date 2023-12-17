@@ -1,7 +1,14 @@
 import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/public';
-import type { OauthFlattenedGuild } from '$lib/utils/api/types';
+import type {
+	FlattenedGuild,
+	OauthFlattenedGuild,
+	TransformedLoginData
+} from '$lib/utils/api/types';
 import { PathNames } from '$lib/utils/constants';
+import { BASE_CARDINAL_API_URL } from '$env/static/private';
+import { ApiClient } from '$lib/ApiClient';
+import type { User } from 'discord.js';
 
 export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
 	const cookie = event.cookies.get(env.PUBLIC_COOKIE!);
@@ -12,8 +19,15 @@ export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
 		});
 	}
 
-	const transformedGuilds = event.locals.guilds ?? [];
-	const guilds = new Map<string, OauthFlattenedGuild>();
+	const userRes = (await event.fetch(`${BASE_CARDINAL_API_URL}/users/@me`, {
+		credentials: 'include',
+		method: 'GET'
+	})) as unknown as { user: User; guilds: FlattenedGuild[] };
+
+	console.log('userRes', userRes);
+
+	const transformedGuilds = userRes.guilds ?? [];
+	const guilds = new Map<string, FlattenedGuild>();
 	for (const guild of transformedGuilds) {
 		guilds.set(guild.id, { ...guild });
 	}
@@ -33,3 +47,7 @@ export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
 
 	return resolve(event);
 };
+
+// const fetchUserGuilds = async () => {
+
+// }

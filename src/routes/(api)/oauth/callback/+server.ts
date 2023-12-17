@@ -32,7 +32,6 @@ export const GET: RequestHandler = async ({ locals, url, fetch }) => {
 		const result = validateNewCookie(newCookie);
 		if (!result || !logindata.user) return sendToOAuthError();
 
-		locals.guilds = logindata.transformedGuilds;
 		locals.user = logindata.user;
 
 		return new Response(undefined, {

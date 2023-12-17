@@ -40,19 +40,19 @@
 		minageMessage: false
 	};
 
-	const modlogChannelOptions: AutocompleteOption<string>[] = data.channels
-		? data.channels
+	const modlogChannelOptions: AutocompleteOption<string>[] = data.guild.channels
+		? data.guild.channels
 				.filter((c) => c.type === ChannelType.GuildText)
-				.sort((a, b) => a.position - b.position)
+				.sort((a, b) => a.rawPosition - b.rawPosition)
 				.map((chn) => {
 					return { label: chn.name ?? 'Unknown Channel', value: chn.id };
 				})
 		: [];
 
-	const guildRoles: AutocompleteOption<string>[] = data.roles
-		? data.roles
+	const guildRoles: AutocompleteOption<string>[] = data.guild.roles
+		? data.guild.roles
 				.filter((r) => r.id !== data.guild.id)
-				.sort((a, b) => b.position - a.position)
+				.sort((a, b) => b.rawPosition - a.rawPosition)
 				.map((role) => {
 					return { label: role.name ?? 'Unknown Role', value: role.id };
 				})

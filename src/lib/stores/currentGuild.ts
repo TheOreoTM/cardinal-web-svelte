@@ -1,13 +1,13 @@
 import { writable, type Writable } from 'svelte/store';
 import { getContext, setContext } from 'svelte';
-import type { OauthFlattenedGuild } from '$lib/utils/api/types';
+import type { FlattenedGuild } from '$lib/utils/api/types';
 
-type CurrentGuildStore = Writable<OauthFlattenedGuild | undefined>;
+type CurrentGuildStore = Writable<FlattenedGuild | undefined>;
 
 const CURRENT_GUILD_KEY = 'CurrentGuild';
 
 export function createCurrentGuildContext(
-	value: OauthFlattenedGuild | undefined = undefined
+	value: FlattenedGuild | undefined = undefined
 ): CurrentGuildStore {
 	const store = writable(value);
 
@@ -24,7 +24,7 @@ export function getCurrentGuildContext(): CurrentGuildStore {
 	return store;
 }
 
-export function setCurrentGuildContext(guild: OauthFlattenedGuild | undefined = undefined): void {
+export function setCurrentGuildContext(guild: FlattenedGuild | undefined = undefined): void {
 	const context = getCurrentGuildContext();
 	context.set(guild);
 }
