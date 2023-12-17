@@ -28,7 +28,7 @@ export const handleAll: Handle = async ({ event, resolve }) => {
 			method: 'GET'
 		})) as TransformedLoginData;
 
-		console.log('userRes', userRes);
+		console.log('userRes - hooks.server.ts', userRes);
 		event.locals.user = userRes.user
 			? { ...userRes.user } //
 			: undefined;
