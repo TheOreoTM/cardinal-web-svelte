@@ -1,7 +1,10 @@
 <script lang="ts">
+	import type { PageData } from './$types';
 	import Meta from '$lib/components/Meta.svelte';
 	import { Noir } from '@skeletonlabs/skeleton';
 	import { getGuildsContext } from '$lib/stores';
+
+	export let data: PageData;
 
 	let guilds = getGuildsContext();
 	let guildsList = [$guilds.values()];
@@ -14,7 +17,7 @@
 <Meta title="Select a guild" />
 Hold on
 
-{guildsList}
+{data.guilds?.values()}
 
 <!-- {#if mutualGuilds}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
