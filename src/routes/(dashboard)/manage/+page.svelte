@@ -1,12 +1,19 @@
 <script lang="ts">
 	import Meta from '$lib/components/Meta.svelte';
-	import { generateBotInvite, getGuildAvatarUrl } from '$lib/utils/functions.js';
-	import { Avatar, Noir, filter } from '@skeletonlabs/skeleton';
+	import { Noir } from '@skeletonlabs/skeleton';
+	import { getGuildsContext } from 'stores';
+
+	let guilds = getGuildsContext();
+	let guildsList = [$guilds.values()];
+
+	console.log(guildsList);
 </script>
 
 <Noir />
 
 <Meta title="Select a guild" />
+
+{guildsList}
 
 <!-- {#if mutualGuilds}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
