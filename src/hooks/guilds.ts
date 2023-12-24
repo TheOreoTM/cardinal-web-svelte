@@ -44,7 +44,7 @@ export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
 		if (!guild) {
 			return new Response(undefined, {
 				status: 302,
-				headers: { location: '/guilds' }
+				headers: { location: '/manage' }
 			});
 		}
 
