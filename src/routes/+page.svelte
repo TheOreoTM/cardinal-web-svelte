@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Meta from '$lib/components/Meta.svelte';
 	import { getModalStore, getToastStore } from '@skeletonlabs/skeleton';
 	const toastStore = getToastStore();
 	const modalStore = getModalStore();
@@ -22,6 +23,7 @@
 	};
 </script>
 
+<Meta title="Home" />
 <div class="container h-full mx-auto gap-8 flex flex-col">
 	<div class="flex items-center justify-between">
 		Hello

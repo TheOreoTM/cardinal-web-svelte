@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import Meta from '$lib/components/Meta.svelte';
-	import { Noir } from '@skeletonlabs/skeleton';
 	import { getGuildsContext } from '$lib/stores';
 
 	export let data: PageData;
@@ -11,8 +10,6 @@
 
 	console.log('guildsList', guildsList);
 </script>
-
-<Noir />
 
 <Meta title="Select a guild" />
 Hold on
