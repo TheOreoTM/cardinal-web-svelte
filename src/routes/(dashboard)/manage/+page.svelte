@@ -12,6 +12,19 @@
 <Noir />
 
 <Meta title="Select a guild" />
+
+<div class="logo-cloud grid-cols-1 lg:!grid-cols-3 gap-1">
+	<a class="logo-item" href="/">
+		<span>(icon)</span>
+		<span>Skeleton</span>
+	</a>
+	<a class="logo-item" href="/">
+		<span>(icon)</span>
+		<span>Skeleton</span>
+	</a>
+	<!-- ... -->
+</div>
+
 {#if $guilds.values()}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
 		{#each $guilds.values() as guild}
