@@ -5,21 +5,17 @@
 	import { getGuildAvatarUrl } from '$lib/utils/functions';
 	import { getGuildsContext } from 'stores';
 
-	export let data: PageData;
+	let data: PageData;
 	let guilds = getGuildsContext();
-	const guildsList = data.guilds?.values();
-
-	console.log('guildsList', data.guilds);
 </script>
 
 <Noir />
 
 <Meta title="Select a guild" />
 
-{guilds}
-{#if guildsList}
+{#if $guilds.values.length !== 0}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
-		{#each guildsList as guild}
+		{#each $guilds.values() as guild}
 			<a
 				class="logo-item card-hover rounded-md relative overflow-hidden"
 				href={`/manage/${guild.id}`}
