@@ -16,17 +16,18 @@
 {#if $guilds.values.length !== 0}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
 		{#each $guilds.values() as guild}
-			<a
-				class="logo-item card-hover rounded-md relative overflow-hidden"
-				href={`/manage/${guild.id}`}
-			>
+			<a class="logo-item" href={`/manage/${guild.id}`}>
 				<div class=" flex flex-col w-full items-center">
-					<Avatar src={getGuildAvatarUrl(guild.id, guild.icon)} rounded="rounded-full" />
+					<span
+						><Avatar src={getGuildAvatarUrl(guild.id, guild.icon)} rounded="rounded-full" /></span
+					>
 					<span class="mt-2 text-center">{guild.name}</span>
 				</div>
 			</a>
 		{/each}
-		<!-- {#if unmutualGuilds}
+	</div>
+
+	<!-- {#if unmutualGuilds}
 			{#each unmutualGuilds as guild}
 				<a
 					class="logo-item card-hover rounded-md relative overflow-hidden"
@@ -48,7 +49,6 @@
 				</a>
 			{/each}
 		{/if} -->
-	</div>
 {:else}
 	{'No beans :('}
 {/if}
