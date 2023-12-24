@@ -1,20 +1,23 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import Meta from '$lib/components/Meta.svelte';
+	import { Avatar, Noir } from '@skeletonlabs/skeleton';
+	import { getGuildAvatarUrl } from '$lib/utils/functions';
 
 	export let data: PageData;
+	const guildsList = data.guilds?.values();
 
 	console.log('guildsList', data.guilds);
 </script>
 
+<Noir />
+
 <Meta title="Select a guild" />
 Hold on
 
-{data.guilds?.values()}
-
-<!-- {#if mutualGuilds}
+{#if guildsList}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
-		{#each mutualGuilds as guild}
+		{#each guildsList as guild}
 			<a
 				class="logo-item card-hover rounded-md relative overflow-hidden"
 				href={`/manage/${guild.id}`}
@@ -25,7 +28,7 @@ Hold on
 				</div>
 			</a>
 		{/each}
-		{#if unmutualGuilds}
+		<!-- {#if unmutualGuilds}
 			{#each unmutualGuilds as guild}
 				<a
 					class="logo-item card-hover rounded-md relative overflow-hidden"
@@ -46,8 +49,8 @@ Hold on
 					</div>
 				</a>
 			{/each}
-		{/if}
+		{/if} -->
 	</div>
 {:else}
 	{'No beans :('}
-{/if} -->
+{/if}
