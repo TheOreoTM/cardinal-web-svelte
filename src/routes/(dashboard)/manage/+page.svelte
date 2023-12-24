@@ -6,7 +6,7 @@
 	let guilds = getGuildsContext();
 	let guildsList = [$guilds.values()];
 
-	console.log(guildsList);
+	console.log('guildsList', guildsList);
 </script>
 
 <Noir />
