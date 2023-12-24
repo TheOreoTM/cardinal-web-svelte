@@ -1,14 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import Meta from '$lib/components/Meta.svelte';
-	import { getGuildsContext } from '$lib/stores';
 
 	export let data: PageData;
 
-	let guilds = getGuildsContext();
-	let guildsList = [$guilds.values()];
-
-	console.log('guildsList', guildsList);
+	console.log('guildsList', data.guilds);
 </script>
 
 <Meta title="Select a guild" />
