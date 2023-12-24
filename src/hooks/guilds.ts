@@ -28,8 +28,9 @@ export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
 	});
 
 	const userRes = (await response.json()) as { user: User; guilds: FlattenedGuild[] };
+	const guildsRes = userRes.guilds;
 
-	console.log('userRes - guilds.ts', userRes);
+	console.log('🚀 ~ file: guilds.ts:32 ~ consthandleGuildsRoute:Handle= ~ guildsRes:', guildsRes);
 
 	const transformedGuilds = userRes.guilds ?? [];
 	const guilds = new Map<string, FlattenedGuild>();
