@@ -12,6 +12,7 @@
 <Noir />
 
 <Meta title="Select a guild" />
+Hold on
 
 {guildsList}
 
@@ -54,5 +55,3 @@
 {:else}
 	{'No beans :('}
 {/if} -->
-
-Hold on
