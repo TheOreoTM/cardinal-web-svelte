@@ -12,8 +12,7 @@
 <Noir />
 
 <Meta title="Select a guild" />
-
-{#if $guilds.values.length !== 0}
+{#if $guilds.values()}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
 		{#each $guilds.values() as guild}
 			<a class="logo-item" href={`/manage/${guild.id}`}>
