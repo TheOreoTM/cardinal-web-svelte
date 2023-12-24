@@ -35,6 +35,8 @@ export const handleGuildsRoute: Handle = async ({ event, resolve }) => {
 		guilds.set(guild.id, { ...guild });
 	}
 
+	event.locals.guilds = guilds;
+
 	if (event.params.guildId) {
 		const guild = guilds.get(event.params.guildId);
 
