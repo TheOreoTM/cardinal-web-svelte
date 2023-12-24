@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Meta from '$lib/components/Meta.svelte';
 	import { Noir } from '@skeletonlabs/skeleton';
-	import { getGuildsContext } from 'stores';
+	import { getGuildsContext } from '$lib/stores';
 
 	let guilds = getGuildsContext();
 	let guildsList = [$guilds.values()];
