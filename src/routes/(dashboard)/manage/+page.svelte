@@ -3,8 +3,10 @@
 	import Meta from '$lib/components/Meta.svelte';
 	import { Avatar, Noir } from '@skeletonlabs/skeleton';
 	import { getGuildAvatarUrl } from '$lib/utils/functions';
+	import { getGuildsContext } from 'stores';
 
 	export let data: PageData;
+	let guilds = getGuildsContext();
 	const guildsList = data.guilds?.values();
 
 	console.log('guildsList', data.guilds);
@@ -13,8 +15,8 @@
 <Noir />
 
 <Meta title="Select a guild" />
-Hold on
 
+{guilds}
 {#if guildsList}
 	<div class="logo-cloud grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-0.5">
 		{#each guildsList as guild}
